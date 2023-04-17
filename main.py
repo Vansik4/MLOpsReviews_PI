@@ -4,12 +4,9 @@ import pandas as pd
 from typing import Optional
 from typing import List
 import numpy as np
-from lightfm import LightFM
-from scipy.sparse import csr_matrix
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Crear una instancia del modelo LightFM
 
 app = FastAPI()
 
