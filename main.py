@@ -84,10 +84,10 @@ cosine_sim = cosine_similarity(title_matrix)
 def get_recommendation(title: str, n: int = 5):
     # Obtener el índice de la película dada
     idx = df[df["title"] == title].index[0]
+    # Seleccionar aleatoriamente 1000 índices
+    indices = random.sample(indices, min(len(indices), 1000))
     # Obtener los puntajes de similitud para la película dada
-    sim_scores = list(enumerate(cosine_sim[idx]))
-    # Ordenar las películas por puntaje de similitud
-    sim_scores = random.sample(sim_scores, 1000)
+    sim_scores = [(i, cosine_sim[i]) for i in indices]
     # Ordenar las películas por puntaje de similitud
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     # Obtener los índices de las películas recomendadas
