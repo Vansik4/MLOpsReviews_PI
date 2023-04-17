@@ -2,6 +2,14 @@ from fastapi import FastAPI, Query, Path, UploadFile, File
 import uvicorn
 import pandas as pd
 from typing import Optional
+from typing import List
+import numpy as np
+from lightfm import LightFM
+from scipy.sparse import csr_matrix
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Crear una instancia del modelo LightFM
 
 app = FastAPI()
 
@@ -69,3 +77,23 @@ def prod_per_country(tipo: str, pais: str, anio: int):
 @app.get('/get_contents/{rating}')
 def get_contents(rating: str) -> int:    
     return len(df[df["rating_x"] == rating]["id"].unique())
+
+df = df[["title", "score_mean"]]
+vectorizer = CountVectorizer()
+title_matrix = vectorizer.fit_transform(df["title"])
+cosine_sim = cosine_similarity(title_matrix)
+
+@app.get("/get_recommendations/{title}")
+def get_recommendation(title: str, n: int = 5):
+    # Obtener el índice de la película dada
+    idx = df[df["title"] == title].index[0]
+    # Obtener los puntajes de similitud para la película dada
+    sim_scores = list(enumerate(cosine_sim[idx]))
+    # Ordenar las películas por puntaje de similitud
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    # Obtener los índices de las películas recomendadas
+    movie_indices = [i[0] for i in sim_scores[1:n+1]]
+    # Obtener las películas recomendadas
+    top_recommendations = df.iloc[movie_indices]["title"].values.tolist()
+    return {"title": title, "recommendations": top_recommendations}
+
