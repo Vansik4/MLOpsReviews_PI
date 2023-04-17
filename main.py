@@ -6,10 +6,10 @@ from typing import List
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+import random
 
 app = FastAPI()
-
+"leemos el Dataframe"
 df = pd.read_csv('./plataformas_ratings.csv', sep=",")
 
 @app.get('/')
@@ -86,6 +86,8 @@ def get_recommendation(title: str, n: int = 5):
     idx = df[df["title"] == title].index[0]
     # Obtener los puntajes de similitud para la película dada
     sim_scores = list(enumerate(cosine_sim[idx]))
+    # Ordenar las películas por puntaje de similitud
+    sim_scores = random.sample(sim_scores, 1000)
     # Ordenar las películas por puntaje de similitud
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     # Obtener los índices de las películas recomendadas
