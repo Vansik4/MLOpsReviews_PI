@@ -11,6 +11,7 @@ import random
 app = FastAPI()
 "leemos el Dataframe"
 df = pd.read_csv('./plataformas_ratings.csv', sep=",")
+df1 = df.sample(n=1000)
 
 @app.get('/')
 def welcome():
@@ -75,7 +76,7 @@ def prod_per_country(tipo: str, pais: str, anio: int):
 def get_contents(rating: str) -> int:    
     return len(df[df["rating_x"] == rating]["id"].unique())
 
-df = df[["title", "score_mean"]]
+df1 = df1[["title", "score_mean"]]
 vectorizer = CountVectorizer()
 title_matrix = vectorizer.fit_transform(df["title"])
 cosine_sim = cosine_similarity(title_matrix)
@@ -83,9 +84,7 @@ cosine_sim = cosine_similarity(title_matrix)
 @app.get("/get_recommendations/{title}")
 def get_recommendation(title: str, n: int = 5):
     # Obtener el índice de la película dada
-    idx = df[df["title"] == title].index[0]
-    # Seleccionar aleatoriamente 1000 índices
-    indices = random.sample(indices, min(len(indices), 1000))
+    indices = df1[df1["title"].str.contains(title)].index.tolist()
     # Obtener los puntajes de similitud para la película dada
     sim_scores = [(i, cosine_sim[i]) for i in indices]
     # Ordenar las películas por puntaje de similitud
