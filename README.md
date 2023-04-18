@@ -1,4 +1,4 @@
-p align=center><img src=https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png><p>
+<p align=center><img src=https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png><p>
 
 # <h1 align=center> **PROYECTO INDIVIDUAL Nº1** </h1>
 
@@ -90,11 +90,19 @@ Para el despliegue de nuestra API, utilizamos Render, una plataforma en la nube 
 
 **`Análisis exploratorio de los datos`**: _(Exploratory Data Analysis-EDA)_
 
-Ya los datos están limpios, ahora es tiempo de investigar las relaciones que hay entre las variables de los datasets, ver si hay outliers o anomalías (que no tienen que ser errores necesariamente :eyes: ), y ver si hay algún patrón interesante que valga la pena explorar en un análisis posterior.  Sabes que puedes apoyarte en librerías como _pandas profiling, sweetviz, autoviz_, entre otros y sacar de allí tus conclusiones 😉
+Una vez que he transformado y limpiado mis datos, mi siguiente paso es buscar patrones y anomalías en ellos para obtener información valiosa y sacar conclusiones. Para ello, utilizaré técnicas de análisis exploratorio de datos (EDA) como visualización y estadística descriptiva. Con EDA, podré detectar relaciones entre variables, identificar valores atípicos y evaluar la distribución de los datos.
+
+Después de realizar el análisis exploratorio, podré hacer inferencias y sacar conclusiones sobre lo que mis datos están diciendo. Por ejemplo, podré descubrir relaciones causales entre variables, patrones estacionales o tendencias a largo plazo que podrían ser útiles para predecir futuros comportamientos o tomar decisiones estratégicas.
+
+En resumen, el análisis exploratorio de datos es una parte esencial de mi proceso de análisis de datos y me permitirá tomar decisiones informadas basadas en los resultados de mis datos.
+
+[EDA_Completo.ipynb](https://github.com/Vansik4/MLOpsReviews_PI/blob/main/EDA_Completo.ipynb)
 
 **`Sistema de recomendación`**: 
 
-Una vez que toda la data es consumible por la API, está lista para consumir por los departamentos de Analytics y Machine Learning, y nuestro EDA nos permite entender bien los datos a los que tenemos acceso, es hora de entrenar nuestro modelo de machine learning para armar un sistema de recomendación de películas. Éste consiste en recomendar películas a los usuarios basándose en películas similares, por lo que se debe encontrar la similitud de puntuación entre esa película y el resto de películas, se ordenarán según el score y devolverá una lista de Python con 5 valores, cada uno siendo el string del nombre de las películas con mayor puntaje, en orden descendente. Debe ser deployado como una función adicional de la API anterior y debe llamarse get_recommendation(titulo: str).
+Una vez que toda la data es consumible por la API, está lista para consumir por los departamentos de Analytics y Machine Learning, y nuestro EDA nos permite entender bien los datos a los que tenemos acceso, es hora de entrenar nuestro modelo de machine learning para armar un sistema de recomendación de películas. Éste consiste en recomendar películas a los usuarios basándose en películas similares, por lo que se debe encontrar la similitud de puntuación entre esa película y el resto de películas, se ordenarán según el score y devolverá una lista de Python con 5 valores.
+
+[desarrollo_system.ipynb](https://github.com/Vansik4/MLOpsReviews_PI/blob/main/desarrollo_system.ipynb)
 
 <br/>
 
