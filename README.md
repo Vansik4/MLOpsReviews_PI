@@ -113,9 +113,10 @@ Una vez que toda la data es consumible por la API, está lista para consumir por
 
 ## **Recursos para el desarrollo**
 
-FAST API Documentation [link](https://fastapi.tiangolo.com/tutorial/)
++ FAST API Documentation [link](https://fastapi.tiangolo.com/tutorial/)
 
-Render Documentation [link](https://render.com/docs/free#free-web-services)
-Render Tutorial [link](https://github.com/HX-FNegrete/render-fastapi-tutorial)
++ Render Documentation [link](https://render.com/docs/free#free-web-services)
 
-Video Explicando el Proyecto [link](https://www.youtube.com/watch?v=qurFBllX9ts)
++ Render Tutorial [link](https://github.com/HX-FNegrete/render-fastapi-tutorial)
+
++ Video Explicando el Proyecto [link](https://www.youtube.com/watch?v=qurFBllX9ts)
