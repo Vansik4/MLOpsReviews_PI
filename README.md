@@ -42,6 +42,11 @@ Debes empezar desde 0, haciendo un trabajo rápido de **`Data Engineer`** y tene
 
 <sub> Nota que aqui se reflejan procesos no herramientas tecnologicas. Has el ejercicio de entender cual herramienta del stack corresponde a cual parte del proceso<sub/>
 
+## **Fuente de datos**
+
++ [Dataset](https://drive.google.com/drive/folders/1b49OVFJpjPPA1noRBBi1hSmMThXmNzxn): La carpeta 'ratings' tiene varios archivos con las reseñas de los usuarios, la carpeta raíz tiene un dataset por proveedor de servicios de streaming.
+
+
 ## **Tratamiento de datos**
 
 **`Transformaciones`**:  Para este MVP no necesitas perfección, ¡necesitas rapidez! ⏩ Vas a hacer estas, ***y solo estas***, transformaciones a los datos:
@@ -106,6 +111,11 @@ Una vez que toda la data es consumible por la API, está lista para consumir por
 
 <br/>
 
+## **Recursos para el desarrollo**
 
+FAST API Documentation [link](https://fastapi.tiangolo.com/tutorial/)
 
+Render Documentation [link](https://render.com/docs/free#free-web-services)
+Render Tutorial [link](https://github.com/HX-FNegrete/render-fastapi-tutorial)
 
+Video Explicando el Proyecto [link](https://www.youtube.com/watch?v=qurFBllX9ts)
