@@ -14,7 +14,7 @@ app = FastAPI()
 df = pd.read_csv('./plataformas_ratings.csv', sep=",")
 with open('cosine_sim.pickle', 'rb') as f:
     cosine_sim = pickle.load(f)
-    
+
 df1 = df.sample(n=1000)
 
 @app.get('/')
@@ -88,11 +88,11 @@ cosine_sim = cosine_similarity(title_matrix)
 @app.get("/get_recommendations/{title}")
 def get_recommendation(title: str, n: int = 5):
     # Obtener el índice de la película dada
-    indices = df[df['title'] == title].index[0]
+    indices = df1[df1['title'] == title].index[0]
     # Obtener los puntajes de similitud para la película dada
     sim_scores = list(enumerate(cosine_sim[indices]))
     # Ordenar las películas por puntaje de similitud
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     # Obtener las películas recomendadas    
-    top_recommendations = [(df.iloc[i[0]].title, df.iloc[i[0]].score_mean) for i in sim_scores[1:6]]
+    top_recommendations = [(df1.iloc[i[0]].title, df1.iloc[i[0]].score_mean) for i in sim_scores[1:6]]
     return {"title": title, "recommendations": top_recommendations}
