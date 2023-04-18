@@ -74,9 +74,9 @@ Creas 6 funciones (recuerda que deben tener un decorador por cada una (@app.get(
 
 + La cantidad de contenidos/productos (todo lo disponible en streaming) que se publicó por país y año. La función debe llamarse prod_per_county(tipo,pais,anio) deberia devolver la cantidada de contenidos/productos segun el tipo de contenido (pelicula,serie) por pais y año en un diccionario con las variables llamadas 'pais' (nombre del pais), 'anio' (año), 'pelicula' (cantidad de contenidos/productos).
 
-+ La cantidad total de contenidos/productos (todo lo disponible en streaming, series, peliculas, etc) según el rating de audiencia dado (para que publico fue clasificada la pelicula). La función debe llamarse get_contents(rating) y debe devolver el numero total de contenido con ese rating de audiencias.
++ La cantidad total de contenidos/productos (todo lo disponible en streaming, series, peliculas etc) según el rating de audiencia dado (para que publico fue clasificada la pelicula). La función debe llamarse get_contents(rating) y debe devolver el numero total de contenido con ese rating de audiencias.
 
-[main.py](https://github.com/Vansik4/MLOpsReviews_PI/blob/main/main.py)
+[main.py](https://github.com/Vansik4/MLOpsReviews_PI/blob/main/main.py) 
 
 <br/>
 
