@@ -1,3 +1,4 @@
+#Importamos librerìas
 from fastapi import FastAPI
 import pandas as pd
 import pickle
@@ -5,7 +6,7 @@ import pickle
 app = FastAPI()
 "leemos el Dataframe"
 df = pd.read_csv('./plataformas_ratings.csv', sep=",")
-with open('cosine_sim.pickle', 'rb') as f:
+with open('cosine_sim.pickle', 'rb') as f: #utilizamos un modelo de recomendación basado en cosine similarity.
     cosine_sim = pickle.load(f)
 
 @app.get('/')
@@ -15,13 +16,17 @@ def welcome():
     """
     return {"message": "Bienvenido a la API de mi proyecto."}
 
+#pelicula con duraciòn maxima segùn el año
 @app.get('/get_max_duration/{year}/{platform}/{duration}')
 def get_max_duration(year: int, platform: str, duration: str):
+    # Filtrar el DataFrame df por el año y la plataforma especificados
     df3 = df[(df['release_year'] == year) & (df['Plataforma'] == platform)]
+    # Determinar qué columna usar para calcular la duración máxima ('duration_int' o 'duration_type')
     column = 'duration_int' if duration == 'min' else 'duration_type'
     titulo = df3.loc[df3[column].idxmax(), 'title']
     return titulo
 
+#Titulos por puntuacion
 @app.get('/get_score_count/{platform}')
 def get_score_count(platform: str, scored: float, year: int):
     df_movies = df[(df['Plataforma'] == platform) & (df["type"] == "movie")]    
@@ -29,7 +34,7 @@ def get_score_count(platform: str, scored: float, year: int):
     movies = movies.drop_duplicates(subset=['title'])
     return len(movies)
 
-
+#Titulos por plataforma
 @app.get('/get_count_platform/{platform}')
 def get_count_platform(platform: str) -> int:
     if platform == 'amazon':
@@ -45,6 +50,7 @@ def get_count_platform(platform: str) -> int:
     unique_movies = platforms['id'].nunique()
     return unique_movies
 
+#Actor con más apariciones por plataforma
 @app.get('/get_actor/{platform}')
 def get_actor(platform: str, year: int) -> str:
     df_actor = df[df['Plataforma'] == platform]
@@ -58,7 +64,7 @@ def get_actor(platform: str, year: int) -> str:
     except AttributeError:
         return "No actor available"
     
-
+#La cantidad de contenidos/productos por pais/año
 @app.get('/prod_per_country/{platform}')
 def prod_per_country(tipo: str, pais: str, anio: int):
     df_plataform = df[(df["type"] == tipo) & (df["country"] == pais) & (df["release_year"] == anio)]    
@@ -66,11 +72,12 @@ def prod_per_country(tipo: str, pais: str, anio: int):
     df_serie_count = df_plataform[df_plataform["type"] == "tv show"]["title"].nunique()
     output_dict = {"pais": pais, "anio": anio, "pelicula": df_movie_count, "serie": df_serie_count}
     return output_dict
-
+#La cantidad total de contenidos/productos por rating
 @app.get('/get_contents/{rating}')
 def get_contents(rating: str) -> int:    
     return len(df[df["rating_x"] == rating]["id"].unique())
 
+#Modelo de recomendaciòn de 5 pelìculas
 @app.get("/get_recommendations/{title}")
 def get_recommendation(title: str, n: int = 5):
     # Obtener el índice de la película dada
