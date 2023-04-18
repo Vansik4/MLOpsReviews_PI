@@ -15,7 +15,7 @@ df = pd.read_csv('./plataformas_ratings.csv', sep=",")
 with open('cosine_sim.pickle', 'rb') as f:
     cosine_sim = pickle.load(f)
 
-df1 = df.sample(n=1000)
+df1 = df.sample(n=500, random_state=38)
 
 @app.get('/')
 def welcome():
